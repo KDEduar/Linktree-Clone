@@ -3,7 +3,6 @@ import { useStepConfig } from "@/hooks/useStepConfig";
 import { stepTwoData } from "./StepTwo.data";
 import Image from "next/image";
 import { useState } from "react";
-import { platform } from "os";
 
 export function StepTwo() {
     const { setInfoUser, infoUser, nextStep } = useStepConfig();

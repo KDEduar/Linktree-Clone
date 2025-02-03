@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { UploadButton } from "@/lib/uploadthing";
 import { Plus } from "lucide-react";
 import { useStepConfig } from "@/hooks/useStepConfig";
+import { toast } from "@/hooks/use-toast";
+import axios from "axios";
 
 export function StepFour() {
     const [name, setName] = useState("");
@@ -13,7 +15,7 @@ export function StepFour() {
     const [photoUrl, setPhotoUrl] = useState("");
     const [showUploadPhoto, setShowUploadPhoto] = useState(false);
     const [selectedPhoto, setSelectedPhoto] = useState("");
-    const { setInfoUser } = useStepConfig();
+    const { setInfoUser, infoUser, nextStep } = useStepConfig();
 
     const handleImageSelect = (src: string) => {
         setSelectedPhoto(src);
@@ -21,6 +23,36 @@ export function StepFour() {
             ...prevInfoUser,
             avatarUrl: src,
         }));
+    };
+
+    const handleContinue = async () => {
+        if (!name || !username) {
+            alert("Please, fill all fields and select and image.");
+            return;
+        }
+
+        setInfoUser((prevInfoUser) => ({
+            ...prevInfoUser,
+            name,
+            username,
+        }));
+
+        try {
+            const response = await axios.post("/api/user", {
+                name: name,
+                username: username,
+                avatarUrl: infoUser.avatarUrl,
+                links: infoUser.platforms,
+                typeUser: infoUser.typeUser,
+            });
+
+            if (response.status === 200) {
+                nextStep();
+            }
+        } catch (error) {
+            toast({ title: "Este usuario ya existe. Inténtalo de nuevo con otro." });
+            console.error(error);
+        }
     };
 
     return (
@@ -110,7 +142,7 @@ export function StepFour() {
                 <div className="mt-6 md:mt-16">
                     <Button
                         className="w-full bg-purple-600"
-                        onClick={() => console.log("")}>
+                        onClick={handleContinue}>
                         Continue
                     </Button>
                 </div>

@@ -16,12 +16,13 @@ import { StepOne } from "../StepOne";
 import { StepTwo } from "../StepTwo";
 import { StepThree } from "../StepThree";
 import { StepFour } from "../StepFour";
+import { Summary } from "../Summary";
 
 
 export function HandlerSteps(props: HandlerStepsProps) {
     const { onReload } = props;
     const [openDialog, setOpenDialog] = useState(true);
-    const { totalSteps, step, setStep, nextStep, prevStep, infoUser } = useStepConfig();
+    const { totalSteps, step, prevStep, infoUser } = useStepConfig();
 
     const progressValue = (step / totalSteps) * 100;
 
@@ -53,7 +54,7 @@ export function HandlerSteps(props: HandlerStepsProps) {
                             {step === 2 && <StepTwo />}
                             {step === 3 && <StepThree />}
                             {step === 4 && <StepFour/>}
-                            {step === 5 && <p>Step Five</p>}
+                            {step === 5 && <Summary onReload={onCloseDialog}/>}
                         </div>
                     </AlertDialogDescription>
                 </AlertDialogHeader>
