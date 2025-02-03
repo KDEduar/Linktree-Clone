@@ -2,6 +2,7 @@ import { useStepConfig } from "@/hooks/useStepConfig";
 import { SummaryProps } from "./Summary.types";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import Conffeti from "@/components/Shared/Conffeti/Conffeti";
 
 export function Summary(props: SummaryProps) {
     const { onReload } = props;
@@ -41,9 +42,11 @@ export function Summary(props: SummaryProps) {
                     </div>
                 </div>
 
+                <Conffeti />
+
                 <div>
                     <Button className="w-full bg-purple-600 mt-5" onClick={onReload}>
-                        Continue
+                        Continue to the profile
                     </Button>
                 </div>
             </div>
