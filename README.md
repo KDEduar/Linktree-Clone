@@ -1,5 +1,5 @@
 This is a proyect : [TarreDev: Clon de LinkTree](https://www.youtube.com/watch?v=GFQJDeNkvzk)
-Minuto 3:50:16
+Minuto 4:31:42
 ## Getting Started
 
 

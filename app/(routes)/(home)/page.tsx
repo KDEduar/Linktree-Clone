@@ -6,6 +6,7 @@ import { useUser } from '@clerk/nextjs'
 import { Link, User } from '@prisma/client'
 import { LoaderProfile } from '@/components/Shared'
 import { StepConfigUserProvider } from '@/contexts'
+import { ProfileInfo } from './components/ProfileInfo'
 
 export default function HomePage() {
     const {user} = useUser()
@@ -46,10 +47,7 @@ export default function HomePage() {
                 <div>
                     <LinkProfile />
 
-                    {/* Profile info */}
-                    <div>
-                        <p>Profile info</p>
-                    </div>
+                    <ProfileInfo onReload={setReload} />
 
                     <div className="mt-20 flex flex-col items-center">
                         <div className="py-10 text-center justify-center flex flex-col items-center text-gray-400 font-semibold">
